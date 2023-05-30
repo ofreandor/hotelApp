@@ -35,6 +35,16 @@ class RoomtypeController extends Controller
     public function store(Request $request)
     {
         //
+        
+        $data = new RoomType();
+        
+        $data->title = $request->title;
+        $data->detail = $request->detail;
+        
+        $data->save();
+        
+        return redirect('admin/create/roomtype')->with('success', 'Data has been Added successful');
+        
     }
 
     /**
@@ -43,6 +53,10 @@ class RoomtypeController extends Controller
     public function show(string $id)
     {
         //
+        
+        $roomtype = RoomType::findorFail($id);
+        
+        return view('roomtype.show', compact('roomtype'));
     }
 
     /**

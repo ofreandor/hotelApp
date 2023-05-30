@@ -11,6 +11,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">RoomTypes</h6>
+                            <a href="{{ route('create.roomtype') }}" class="btn btn-primary btn-sm float-right">Add New </a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -26,6 +27,9 @@
                                     </thead>
                                
                                     <tbody>
+                                    
+                                    @if($roomtype)
+                                        
                                         @foreach ($roomtype as $roomtype )
                                             
                                             <tr>
@@ -33,7 +37,7 @@
                                                 <td>{{ $roomtype->title }}</td>
                                                 <td>{{ $roomtype->detail }}</td>
                                                 <td>
-                                                  <a href=""><i class="fa fa-eye mx-3 text-success"></i></a>
+                                                  <a href="{{ route('show.roomtype', $roomtype->id) }}"><i class="fa fa-eye mx-3 text-success"></i></a>
                                                   
                                                   <a href=""><i class="fa fa-edit mx-3 text-primary"></i></a>
                                                   
@@ -42,6 +46,8 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                    @endif
+                                    
             
                                     </tbody>
                                 </table>
