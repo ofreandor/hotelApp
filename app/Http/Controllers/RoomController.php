@@ -2,31 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RoomType;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
-class RoomtypeController extends Controller
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $room = Room::with('Roomtype');
+        dd($room->Roomtype->title);
         
-        $roomtype = RoomType::all();
-        
-        return view('roomtype.index', compact('roomtype'));
+        return view('room.index', ['room' => $room]);
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('roomtype.create');
         
-        //
+        return view('room.create');
     }
 
     /**
@@ -35,16 +34,14 @@ class RoomtypeController extends Controller
     public function store(Request $request)
     {
         //
-        
-        $data = new RoomType();
+        $data = new Room();
         
         $data->title = $request->title;
         $data->detail = $request->detail;
         
         $data->save();
         
-        return redirect('admin/create/roomtype')->with('success', 'Data has been Added successful');
-        
+        return redirect('admin/create/room')->with('success', 'Data has been Added successful');
     }
 
     /**
@@ -53,10 +50,9 @@ class RoomtypeController extends Controller
     public function show(string $id)
     {
         //
+        $room = Room::findorFail($id);
         
-        $roomtype = RoomType::findorFail($id);
-        
-        return view('roomtype.show', compact('roomtype'));
+        return view('room.show', compact('room'));
     }
 
     /**
@@ -65,9 +61,9 @@ class RoomtypeController extends Controller
     public function edit(string $id)
     {
         //
-         $roomtype = RoomType::findorFail($id);
+        $room = Room::findorFail($id);
         
-        return view('roomtype.edit', compact('roomtype'));
+        return view('room.edit', compact('room'));
         
     }
 
@@ -77,15 +73,6 @@ class RoomtypeController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        
-        $data =  RoomType::find($id);
-        
-        $data->title = $request->title;
-        $data->detail = $request->detail;
-        
-        $data->save();
-        
-        return redirect()->back()->with('success', 'Data has been Updated successful');
     }
 
     /**
@@ -94,10 +81,5 @@ class RoomtypeController extends Controller
     public function destroy(string $id)
     {
         //
-        
-        $data = RoomType::where('id',$id)->firstOrFail()->delete();
-        
-        return redirect()->back()->with('success', 'Data has been Deleted successful');
-        
     }
 }

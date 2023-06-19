@@ -8,8 +8,8 @@
           
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Add RoomTypes</h6>
-                            <a href="{{ url('admin/roomtype') }}" class="btn btn-primary btn-sm float-right">View All Roomtype</a>
+                            <h6 class="m-0 font-weight-bold text-primary">Add Room</h6>
+                            <a href="{{ url('admin/roomtype') }}" class="btn btn-primary btn-sm float-right">View All Room</a>
                         </div>
                         <div class="card-body">
                         @if(Session::has('success'))
